@@ -28,13 +28,15 @@
         android:layout_alignParentLeft="true"
         android:background="#CCFFFF"
         android:orientation="horizontal"
-        android:weightSum="3" >
+        android:weightSum="3" 
+        >
 
         <Button
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
+            android:gravity="center"
             android:layout_weight="1"
             android:background="#bdfcc9"
             android:text="上一题" />
