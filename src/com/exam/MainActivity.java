@@ -9,15 +9,18 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 public class MainActivity extends FragmentActivity {
 
 	private ViewPager topic_pager;
-	private int ViewTag = 0;
-	private int length = 5;
-	private TextView tv_page;
+	private int ViewTag = 1;
+	private int length = 10;
+	private TextView tv_page,tv_time;
+	private Button btn_up,btn_down,btn_time,btn_stop;
 	
 	private List<View> lists = new ArrayList<View>(); 
 	private ViewPagerAdapter adapter; 
@@ -29,6 +32,51 @@ public class MainActivity extends FragmentActivity {
         
         topic_pager = (ViewPager) findViewById(R.id.topic_pager);
         tv_page = (TextView) findViewById(R.id.textView2);
+        tv_time = (TextView) findViewById(R.id.tv_time);
+        btn_up = (Button) findViewById(R.id.button1);
+        btn_down = (Button) findViewById(R.id.button3);
+        btn_time = (Button) findViewById(R.id.btn_time);
+        btn_stop = (Button) findViewById(R.id.btn_stop);
+        
+        btn_up.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				ViewTag = topic_pager.getCurrentItem()-1;
+				topic_pager.setCurrentItem(ViewTag);
+	        	tv_page.setText(ViewTag+"");
+			}
+		});
+		
+        btn_down.setOnClickListener(new OnClickListener() {
+        	
+        	@Override
+        	public void onClick(View v) {
+        		// TODO Auto-generated method stub
+        		ViewTag = topic_pager.getCurrentItem()+1;
+        		topic_pager.setCurrentItem(ViewTag);
+        		tv_page.setText(ViewTag+"");
+        	}
+        });
+        
+        btn_time.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				RestTimeUtil.startTime(tv_time);
+			}
+		});
+        
+        btn_stop.setOnClickListener(new OnClickListener() {
+        	
+        	@Override
+        	public void onClick(View v) {
+        		// TODO Auto-generated method stub
+        		RestTimeUtil.pauseTime(tv_time);
+        	}
+        });
         
         // 页面添加到viewPager集合  
         for (int i = 0; i < length; i++) {
